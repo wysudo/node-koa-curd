@@ -1,0 +1,39 @@
+{
+    "plugins": [
+        // 允许Babel转换对象解构赋值的rest属性和对象文字的spread属性。
+        "transform-object-rest-spread" 
+    ],
+    // env 选项的值将从 process.env.BABEL_ENV 获取，如果没有的话，则获取 process.env.NODE_ENV 的值，它也无法获取时会设置为 "development"
+    "env": {
+        "client": { //前端开发
+            "presets": [
+                ["env", {
+                    "debug": true,
+                    "targets": {
+                        // 支持每个浏览器最后两个版本和 ie 大于等于 11 版本所需的 polyfill 和代码转换
+                        "browsers": ["last 2 versions", "ie >= 11"]
+                    },
+                    "useBuiltIns": true // 默认为false 作用是使用更少的polyaill
+                }]
+            ],
+            "plugins": [
+                "dynamic-import-webpack", //动态导入文件插件(用于前端数据导入)
+                "transform-class-properties" //用于属性初始化
+            ]
+        },
+        "server": {  // node.js开发(后端开发) (可以配置 babel-preset-env 仅包含特定版本所需的 polyfill 和 transform 6为node版本)
+            "presets": [
+                ["env", {
+                    "debug": true,
+                    "targets": {
+                        "node": 10
+                    }
+                }]
+            ],
+            "plugins": [
+                "transform-decorators-legacy",  //  装饰器(本身是一函数)
+                "transform-class-properties" //用于属性初始化
+            ]
+        }
+    }
+}
