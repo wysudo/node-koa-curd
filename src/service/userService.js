@@ -23,5 +23,11 @@ export const UserService = {
         return await User.forge(vo,{
             hasTimestamps: true
         }).save(null,{});
+    },
+
+    async delete(id){
+        return await User.forge({
+            id: id
+        }).destroy();
     }
 };

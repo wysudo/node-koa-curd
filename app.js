@@ -15,6 +15,6 @@ let registerRouter=require('./registerRouter.js')();//路由注册；
 app.use(registerRouter);
 
 import { port } from './src/config';
-app.listen(port,()=>{
-    console.log("端口号：" + port);
-});
+const server = app.listen(port);
+server.setTimeout(120000);
+console.log('Listening to port ' + port);
